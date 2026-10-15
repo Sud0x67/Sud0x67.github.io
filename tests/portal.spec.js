@@ -5,7 +5,7 @@ test('switches content, metadata and accessible names in both directions', async
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/');
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText("Sud0x67");
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText("一些工具，一些探索。");
   await page.getByRole('button', { name: 'EN', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   await expect(page).toHaveTitle('Sud0x67 · Project Directory');
