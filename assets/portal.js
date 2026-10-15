@@ -2,11 +2,11 @@
   'use strict';
   const translations = {
     zh: {
-      title: 'Sud0x67 · 项目与笔记',
+      title: 'Sud0x67 · 项目导航',
       description: 'Sud0x67 的项目目录：在线工具、AI 协作、解释器教程与技术笔记。',
       skip: '跳至项目', navigation: '主导航', language: '显示语言', features: '项目特点',
       home: '首页', about: '关于', blog: '博客', navTags: '标签',
-      intro: '一个写代码的俗人.',
+      intro: '项目、工具与技术笔记。',
       explore: '探索项目', projects: '项目目录', projectNote: '工具、产品与学习',
       toolCategory: '在线工具', productCategory: '产品', readingCategory: '阅读与学习', aboutCategory: '关于我',
       cipherDescription: '在浏览器本地完成加解密、摘要与编码转换。一个面向开发者的密码学工具箱。',
@@ -17,15 +17,15 @@
       localProcessing: '本地计算', bilingual: '中英双语', aiCollaboration: 'AI 协作', localFirst: '本地优先',
       interpreter: '解释器', programmingLanguages: '编程语言', chineseEdition: '中文教程',
       experience: '工作经历', research: '研究成果', openSource: '开源实践',
-      archiveTitle: '写过的，也留着。', archiveDescription: '早期的技术笔记与踩坑记录，仍然可以在博客归档中找到。',
-      archives: '博客归档', tags: '按标签浏览', source: '本站源码',
+      archiveTitle: '博客与技术笔记', archiveDescription: '技术笔记与踩坑记录，集中在独立博客中维护。',
+      readBlog: '进入博客', archives: '文章归档', tags: '按标签浏览', source: '本站源码',
     },
     en: {
-      title: 'Sud0x67 · Projects & Notes',
+      title: 'Sud0x67 · Project Directory',
       description: 'The personal index of Sud0x67: developer tools, AI collaboration, interpreters, and technical notes.',
       skip: 'Skip to projects', navigation: 'Main navigation', language: 'Display language', features: 'Project features',
       home: 'Home', about: 'About', blog: 'Blog', navTags: 'Tags',
-      intro: 'Just someone who writes code.',
+      intro: 'Projects, tools, and technical notes.',
       explore: 'Explore projects', projects: 'Project index', projectNote: 'Tools, products & learning',
       toolCategory: 'Developer tool', productCategory: 'Product', readingCategory: 'Reading & learning', aboutCategory: 'About me',
       cipherDescription: 'Encryption, decryption, hashes, and encodings, processed locally in your browser. A cryptography workbench for developers.',
@@ -36,8 +36,8 @@
       localProcessing: 'On-device', bilingual: '中文 / EN', aiCollaboration: 'AI collaboration', localFirst: 'Local-first',
       interpreter: 'Interpreters', programmingLanguages: 'Programming languages', chineseEdition: 'Chinese edition',
       experience: 'Experience', research: 'Research', openSource: 'Open source',
-      archiveTitle: 'Notes worth keeping.', archiveDescription: 'Earlier technical notes and lessons learned are still here, in the blog archive.',
-      archives: 'Blog archive', tags: 'Browse by tag', source: 'Site source',
+      archiveTitle: 'Blog & technical notes', archiveDescription: 'Technical notes and lessons learned, maintained in a dedicated blog.',
+      readBlog: 'Read the blog', archives: 'Blog archive', tags: 'Browse by tag', source: 'Site source',
     },
   };
   function setLanguage(language) {

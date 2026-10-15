@@ -1,32 +1,41 @@
-# Sud0x67 · 项目与笔记
+# Sud0x67 · 项目导航
 
-个人项目目录：<https://sud0x67.github.io/>。默认中文，支持即时切换英文。
+项目与工具总入口：<https://sud0x67.github.io/>。沿用原博客视觉风格，支持中文和英文。
 
-## 结构与维护
+## 站点分工
 
-- `index.html`：首页、项目链接和默认中文内容。
-- `assets/portal.css`：独立的响应式首页样式。
-- `assets/portal.js`：中文/英文文案、页面标题和无障碍标签。语言选择只保留在当前页面，刷新后恢复中文。
-- 首页复用博客原来的 `/img/intro/index-bg.png` 背景与 `/img/assets/ks.ico` 图标。
-- `2021/`、`archives/`、`tags/`、`about/` 及原有 `css/`、`js/`、`font/`、`img/`：历史博客与其资源，保留原始地址。
+| 站点 | 源码仓库 | 维护内容 |
+| --- | --- | --- |
+| [项目导航](https://sud0x67.github.io/) | [Sud0x67.github.io](https://github.com/Sud0x67/Sud0x67.github.io) | 博客入口、在线工具及项目链接 |
+| [博客](https://sud0x67.github.io/blog/) | [blog](https://github.com/Sud0x67/blog) | Hexo 源码、Markdown 文章、Cxo 主题、文章归档与标签 |
 
-首页收录 Cipher Lab、TeamAligned、手撸解释器教程和个人简历。新增项目时，在 `index.html` 中添加卡片，并在 `assets/portal.js` 的两份语言字典中补齐文案。
+博客已恢复到本地 `~/code/blog`，保留原 Git 历史和四篇文章；请在该项目的 `source/_posts/` 中写文章，推送 `main` 后自动发布。写作步骤见[博客 README](https://github.com/Sud0x67/blog#readme)。导航仓库不再生成或发布博客文章。
 
-首页采用原生 HTML、CSS 和 JavaScript，无构建步骤、运行时依赖、外部字体或统计脚本；禁用 JavaScript 时仍可使用中文导航。首页与博客使用相同的深色网格横幅、博客名、签名、系统字体、青色强调色和深灰页脚，项目以文章列表的形式展示。博客历史页面保留原有实现。
+两个站点各自发布，博客更新不会覆盖导航首页。不要从 Hexo 项目向此仓库执行旧的 `hexo deploy`。
+
+## 导航页维护
+
+- `index.html`：默认中文首页、项目与博客入口。
+- `assets/portal.css`：首页响应式样式，与 Cxo 博客保持相近的背景、字体、青色链接和页脚。
+- `assets/portal.js`：中文/英文文案、标题及无障碍标签。刷新后恢复中文。
+- `assets/blog-redirect.js`：旧博客地址兼容跳转，保留查询参数和页内锚点。
+- `2021/`、`archives/`、`tags/`、`about/`：旧地址的静态跳转页，分别转向 `/blog/` 下的同名路径，包含 canonical、无 JavaScript 的跳转后备和普通链接。
+- `css/`、`js/`、`font/`、`img/`：原博客的历史资源，保留兼容；导航首页复用其中的背景和图标。新博客有自己的资源副本。
+
+添加项目时，在 `index.html` 添加入口，并在 `assets/portal.js` 两份字典中补齐文案。无需引入构建工具或后端。旧文章的原始 HTML 可在迁移前的 Git 历史中找到。
 
 ## 本地预览
 
-安装 Python 3 后，在仓库目录运行：
-
 ```sh
+cd ~/code/Sud0x67.github.io
 python3 -m http.server 4174 --bind 127.0.0.1
 ```
 
-访问 <http://127.0.0.1:4174/>。项目卡片指向同域名下独立发布的其他仓库，因此本地服务器不会包含这些项目；部署后可正常访问。
+访问 <http://127.0.0.1:4174/>。博客与其他项目由独立仓库发布，本地这个静态服务器不包含它们。预览博客应在 `~/code/blog` 运行 `npm run server`，访问 <http://localhost:4175/blog/>。
 
-## 浏览器检查
+## 检查
 
-需要 Node.js 20+、npm 和 Python 3。npm 依赖仅用于测试，不参与站点发布。
+需要 Node.js 20+、npm 和 Python 3。npm 依赖仅用于测试。
 
 ```sh
 npm ci
@@ -34,22 +43,8 @@ npx playwright install chromium firefox webkit
 npm test
 ```
 
-覆盖中英文切换、键盘导航、项目入口、320px 窄屏布局及全部历史文章/归档/标签地址，运行 Chromium、Firefox、WebKit 和移动端配置。
+覆盖中英文、导航目标、键盘导航、320px 布局、旧地址映射，以及查询参数/锚点的转发。跳转浏览器测试使用受控的博客目标页，真实博客在自己的仓库中测试并另行验证线上地址。
 
 ## 发布
 
-GitHub Pages 沿用仓库已有配置：**Deploy from a branch → `master` → `/ (root)`**。提交并推送到 `master` 后，GitHub 自动构建并发布，无需额外打包命令。
-
-只维护目录页时，请勿移动历史博客文件，也不要替换旧博客使用的共享样式。首页样式与脚本集中在 `assets/portal*`，不会改变文章页面。
-
-## 继续更新博客
-
-**仍然可以使用这个仓库发布博客。** 当前 `master` 是发布分支，历史页面中的生成标记为 Hexo 4.2.0；仓库不包含原来的文章 Markdown、`_config.yml`、`source/_posts/` 或 `themes/`，新增的 `package.json` 也只是首页测试工具，并不是 Hexo 项目配置。
-
-已在本地备份中确认找到原 Hexo 源项目：包含四篇文章的 Markdown、Cxo 主题及指向本仓库的部署配置。备份项目声明 Hexo 4.2.1，尚未验证其旧依赖在当前 Node.js 下的构建兼容性；本次只调整发布仓库的首页，没有修改原备份或接入 Hexo 构建。
-
-- 有原 Hexo 源码：在原项目中写文章并生成页面。需要先将这个首页及 `assets/portal.css`、`assets/portal.js` 纳入原项目的主题或构建流程，再整体发布；不能假定原来的 `hexo deploy` 会保留这里手工添加的文件，它可能重新生成并覆盖首页。
-- 只有当前仓库：可以直接添加或修改静态 HTML 并推送发布，但文章归档、标签页和上一篇/下一篇链接都需要一并维护。在这里直接添加 Markdown 不会自动变成使用原主题的博客文章。
-- 长期维护建议：将找回的 Hexo 源码存放在同一仓库的独立 `source` 分支（或者独立源码仓库），由构建流程生成博客并合并目录首页后统一发布。当前尚未恢复这套生成流程，现有文章和固定链接保持原样。
-
-Hexo 源码结构见[官方 Setup 文档](https://hexo.io/docs/setup)，Git 发布方式见[官方部署文档](https://hexo.io/docs/one-command-deployment)。
+沿用 GitHub Pages **Deploy from a branch → `master` → `/ (root)`**。推送本仓库的 `master` 后 GitHub 自动发布，无需打包。博客仓库采用 `main` 与 GitHub Actions，两者发布配置相互独立。

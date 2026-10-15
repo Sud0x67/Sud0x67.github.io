@@ -2,7 +2,7 @@
   "name": "sud0x67-personal-index",
   "version": "1.0.0",
   "private": true,
-  "description": "Static personal project directory with an archived blog",
+  "description": "Personal project and tool directory with legacy blog redirects",
   "type": "module",
   "scripts": {
     "dev": "python3 -m http.server 4174 --bind 127.0.0.1",

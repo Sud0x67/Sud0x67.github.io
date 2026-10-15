@@ -5,13 +5,13 @@ test('switches content, metadata and accessible names in both directions', async
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/');
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText("Sud0x67's Blog");
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText("Sud0x67");
   await page.getByRole('button', { name: 'EN', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-  await expect(page).toHaveTitle('Sud0x67 · Projects & Notes');
+  await expect(page).toHaveTitle('Sud0x67 · Project Directory');
   await expect(page.getByRole('navigation', { name: 'Main navigation' })).toBeVisible();
-  await expect(page.getByRole('navigation').getByRole('link', { name: 'About', exact: true })).toHaveAttribute('href', '/about/');
-  await expect(page.getByRole('heading', { name: 'Notes worth keeping.' })).toBeVisible();
+  await expect(page.getByRole('navigation').getByRole('link', { name: 'About', exact: true })).toHaveAttribute('href', '/blog/about/');
+  await expect(page.getByRole('heading', { name: 'Blog & technical notes' })).toBeVisible();
   await expect(page.getByRole('button', { name: 'EN', exact: true })).toHaveAttribute('aria-pressed', 'true');
   await page.getByRole('button', { name: '中文', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('lang', 'zh-CN');
@@ -30,8 +30,8 @@ test('exposes project destinations and keyboard navigation', async ({ page }) =>
   await expect(page.getByRole('link', { name: '跳至项目' })).toBeFocused();
   await page.keyboard.press('Enter');
   await expect(page).toHaveURL(/#projects$/);
-  await page.getByRole('link', { name: '博客归档', exact: true }).click();
-  await expect(page).toHaveURL(/\/archives\/$/);
+  await expect(page.getByRole('link', { name: '进入博客', exact: true })).toHaveAttribute('href', '/blog/');
+  await expect(page.getByRole('link', { name: '文章归档', exact: true })).toHaveAttribute('href', '/blog/archives/');
 });
 
 test('fits narrow screens and keeps titles separate from arrows', async ({ page }) => {
@@ -52,13 +52,25 @@ test('fits narrow screens and keeps titles separate from arrows', async ({ page 
   }
 });
 
-test('retains all existing blog, archive and tag permalinks', async ({ request }) => {
+test('maps all legacy blog, archive and tag permalinks to the separate blog', async ({ request }) => {
   const files = await readdir(new URL('../', import.meta.url), { recursive: true });
   const legacyPages = files.filter(file => /^(2021|archives|tags|about)\//.test(file) && file.endsWith('/index.html'));
   expect(legacyPages.length).toBeGreaterThan(10);
   for (const file of legacyPages) {
     const response = await request.get('/' + file.replace(/index\.html$/, ''));
     expect(response.status(), file).toBe(200);
-    expect(await response.text(), file).toContain("Sud0x67's Blog");
+    const html = await response.text();
+    expect(html, file).toContain("Sud0x67's Blog");
+    expect(html, file).toContain('rel="canonical" href="https://sud0x67.github.io/blog/');
+    expect(html, file).toContain('http-equiv="refresh"');
   }
+});
+
+// The separate blog is deliberately mocked here: this test verifies only the legacy redirect boundary.
+test('forwards legacy queries and fragments to the separate blog', async ({ page, baseURL }) => {
+  await page.route('**/blog/**', route => route.fulfill({
+    contentType: 'text/html', body: '<!doctype html><title>Blog destination</title>',
+  }));
+  await page.goto('/archives/?from=legacy#2021');
+  await expect(page).toHaveURL(new URL('/blog/archives/?from=legacy#2021', baseURL).href);
 });
