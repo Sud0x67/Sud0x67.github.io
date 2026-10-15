@@ -5,11 +5,12 @@ test('switches content, metadata and accessible names in both directions', async
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/');
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('一些工具，一些探索。');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText("Sud0x67's Blog");
   await page.getByRole('button', { name: 'EN', exact: true }).click();
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   await expect(page).toHaveTitle('Sud0x67 · Projects & Notes');
   await expect(page.getByRole('navigation', { name: 'Main navigation' })).toBeVisible();
+  await expect(page.getByRole('navigation').getByRole('link', { name: 'About', exact: true })).toHaveAttribute('href', '/about/');
   await expect(page.getByRole('heading', { name: 'Notes worth keeping.' })).toBeVisible();
   await expect(page.getByRole('button', { name: 'EN', exact: true })).toHaveAttribute('aria-pressed', 'true');
   await page.getByRole('button', { name: '中文', exact: true }).click();
