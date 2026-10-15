@@ -1,109 +1,75 @@
-<!DOCTYPE html><html lang="cn_zh"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="Sud0x67@github"><meta name="renderer" content="webkit"><meta name="copyright" content="Sud0x67@github"><meta name="keywords" content="Sud0x67"><meta name="description" content=""><meta name="Cache-Control" content="no-cache"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>Sud0x67's Blog</title><link rel="stylesheet" href="/css/style.css?v=2018.7.9"><link rel="stylesheet" href="/css/animation.css?v=2018.7.9"><link rel="icon" href="/img/assets/ks.ico"><link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css?version=1.5.6"><!-- scripts--><script>(function( w ){
-  "use strict";
-  // rel=preload support test
-  if( !w.loadCSS ){
-    w.loadCSS = function(){};
-  }
-  // define on the loadCSS obj
-  var rp = loadCSS.relpreload = {};
-  // rel=preload feature support test
-  // runs once and returns a function for compat purposes
-  rp.support = (function(){
-    var ret;
-    try {
-      ret = w.document.createElement( "link" ).relList.supports( "preload" );
-    } catch (e) {
-      ret = false;
-    }
-    return function(){
-      return ret;
-    };
-  })();
-
-  // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
-  // then change that media back to its intended value on load
-  rp.bindMediaToggle = function( link ){
-    // remember existing media attr for ultimate state, or default to 'all'
-    var finalMedia = link.media || "all";
-
-    function enableStylesheet(){
-      link.media = finalMedia;
-    }
-
-    // bind load handlers to enable media
-    if( link.addEventListener ){
-      link.addEventListener( "load", enableStylesheet );
-    } else if( link.attachEvent ){
-      link.attachEvent( "onload", enableStylesheet );
-    }
-
-    // Set rel and non-applicable media type to start an async request
-    // note: timeout allows this to happen async to let rendering continue in IE
-    setTimeout(function(){
-      link.rel = "stylesheet";
-      link.media = "only x";
-    });
-    // also enable media after 3 seconds,
-    // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
-    setTimeout( enableStylesheet, 3000 );
-  };
-
-  // loop through link elements in DOM
-  rp.poly = function(){
-    // double check this to prevent external calls from running
-    if( rp.support() ){
-      return;
-    }
-    var links = w.document.getElementsByTagName( "link" );
-    for( var i = 0; i < links.length; i++ ){
-      var link = links[ i ];
-      // qualify links to those with rel=preload and as=style attrs
-      if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
-        // prevent rerunning on link
-        link.setAttribute( "data-loadcss", true );
-        // bind listeners to toggle media back
-        rp.bindMediaToggle( link );
-      }
-    }
-  };
-
-  // if unsupported, run the polyfill
-  if( !rp.support() ){
-    // run once at least
-    rp.poly();
-
-    // rerun poly on an interval until onload
-    var run = w.setInterval( rp.poly, 500 );
-    if( w.addEventListener ){
-      w.addEventListener( "load", function(){
-        rp.poly();
-        w.clearInterval( run );
-      } );
-    } else if( w.attachEvent ){
-      w.attachEvent( "onload", function(){
-        rp.poly();
-        w.clearInterval( run );
-      } );
-    }
-  }
-
-
-  // commonjs
-  if( typeof exports !== "undefined" ){
-    exports.loadCSS = loadCSS;
-  }
-  else {
-    w.loadCSS = loadCSS;
-  }
-}( typeof global !== "undefined" ? global : this ) );</script><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" defer></script><script src="/js/main.js?v=2018.7.9" defer></script><!-- fancybox--><link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script><!-- busuanzi--><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><meta name="generator" content="Hexo 4.2.0"></head><body><section class="profile-close" id="cxo-profile"><div class="profile-avatar"><i class="fa fa-caret-left"></i><img src="/img/assets/ks.jpg"></div><!--.profile-saying
-  i.fa.fa-comment
-  .saying--><div class="cxo-profile-inner"><div class="profile-name">Sud0x67</div><div class="profile-signature">一个写代码的俗人.</div><div class="read-progress"></div></div></section><header id="cxo-intro" style="height: 70vh;background-image: url(/img/intro/index-bg.png);"><nav id="cxo-intro-nav"><section><div class="intro-nav-title"><a href="/">Sud0x67's Blog</a></div><div class="intro-nav-label-box"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Blog</a><a href="/tags/">Tags</a></div><i class="fa fa-bars intro-nav-menu"><div class="intro-nav-drop"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Blog</a><a href="/tags/">Tags</a></div></i><div class="clear"></div></section></nav><h1>Sud0x67's Blog</h1><h5>一个写代码的俗人.</h5><div class="intro-social"><a class="fa fa-envelope" href="mailto:mail://jokeroller@163.com" title="email"></a><a class="fa fa-github" href="//github.com/sud0x67" target="_blank" title="github"></a><a class="fa fa-facebook" href="//www.facebook.com" target="_blank" title="facebook"></a><a class="fa fa-twitter" href="//twitter.com" target="_blank" title="twitter"></a></div></header><article class="cxo-up" id="cxo-content-outer"><section id="cxo-content-inner"><section id="recent-posts"><div class="recent-post-item"><div class="post-title"><a href="/2021/07/12/python-%E5%90%84%E7%A7%8D%E5%BA%93%E4%B8%8D%E5%90%8C%E7%89%88%E6%9C%AC%E5%87%BA%E9%94%99%E9%87%87%E5%9D%91%E8%AE%B0%E5%BD%95/">python 各种库不同版本出错采坑记录</a></div><div class="post-time"><i class="fa fa-table"></i><time datetime="2021-07-12T04:27:11.000Z">2021-07-12</time></div><div class="recent-post-content">python 各种库不同版本出错采坑记录半年来断断续续遇到不少不同版本的python库导致程序出错的问题，此篇文章作为简单记录。
-xlrd和xlwtxlrd和xlwd 的新版本取消了对.xlxs后缀的Excel文件的支持，最近支持的版本为xlrd==1.2.0 xlwt==1.3.0
-GymGym 版本创建新环境的j接口更改了，0.18.0和0.10.5 版本有所不同
-pygameDeepmind 的 pysc2 依赖pygame pygame==1.9.6 对于2.0.1会报错pygame.display.flip() pygame.error: Unable to make GL cont ...</div><div class="recent-post-tags"><a class="post-tag fa fa-tag" href="javascript:void(0)" date-tags="python"> python</a><a class="post-tag fa fa-tag" href="javascript:void(0)" date-tags="依赖"> 依赖</a></div><div class="read-more"><a class="more" href="/2021/07/12/python-%E5%90%84%E7%A7%8D%E5%BA%93%E4%B8%8D%E5%90%8C%E7%89%88%E6%9C%AC%E5%87%BA%E9%94%99%E9%87%87%E5%9D%91%E8%AE%B0%E5%BD%95/#more">ReadMore</a></div><hr></div><div class="recent-post-item"><div class="post-title"><a href="/2021/07/10/%E6%90%AD%E5%BB%BAfabric%E7%8E%AF%E5%A2%83%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/">搭建fabric环境时遇到的一些问题</a></div><div class="post-time"><i class="fa fa-table"></i><time datetime="2021-07-10T06:31:42.000Z">2021-07-10</time></div><div class="recent-post-content">搭建fabric环境时遇到的一些问题Docker 镜像下载慢的问题搭建fabric环境一般要用到docker容器，我们经常会遇到国内开发者都会遇到的一个问题，100多M的一个小镜像要下载一个多小时怎么办？？我采用了DaoCloud团队提供的Docker Hub Mirror，你们可以搜索一下DaoCloud的官网，进入官网让后注册登录，首页选择更多–&gt;加速器，每个人会生成一个独一无二的镜像地址你只要在/etc/docker/daemon.json文件中（我使用的是Ubuntu16.04，其他平台DaoCloud官网也有对应的教程）添加如下的代码就可以了。
-123456&#123;     ...</div><div class="recent-post-tags"><a class="post-tag fa fa-tag" href="javascript:void(0)" date-tags="fabric"> fabric</a></div><div class="read-more"><a class="more" href="/2021/07/10/%E6%90%AD%E5%BB%BAfabric%E7%8E%AF%E5%A2%83%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/#more">ReadMore</a></div><hr></div><div class="recent-post-item"><div class="post-title"><a href="/2021/07/10/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3c%E8%AF%AD%E8%A8%80%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/">深入理解c语言运算符优先级</a></div><div class="post-time"><i class="fa fa-table"></i><time datetime="2021-07-10T06:28:21.000Z">2021-07-10</time></div><div class="recent-post-content">深入了解c语言运算符优先级引言很多刚学编程的同学对c语言运算符的优先级往往存在一些困惑，对于一些已经入门了的同学一些不太常见的用法也较难理解，比如常见的函数指针：
-12345678//函数指针int (*add)(int a , int b);//返回指针的函数int * getAddress(char [] , int n);//数组指针int (*a)[]//指针数组int * a[];
-刚刚接触这些的时候我们往往很难理解这些符号，即使我们理解了也往往对于新的符号也经常出现困惑：
-1*p++；（*p）++；*++p；++*p；*p.f
-而彻底理解C语言运算符的优先级，能让你对这些游刃有余， ...</div><div class="recent-post-tags"><a class="post-tag fa fa-tag" href="javascript:void(0)" date-tags="c语言"> c语言</a><a class="post-tag fa fa-tag" href="javascript:void(0)" date-tags="运算符"> 运算符</a></div><div class="read-more"><a class="more" href="/2021/07/10/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3c%E8%AF%AD%E8%A8%80%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/#more">ReadMore</a></div><hr></div><div class="recent-post-item"><div class="post-title"><a href="/2021/07/10/mysql-8-0-%E5%AE%89%E8%A3%85%E6%97%B6%E6%97%A0%E8%AE%BE%E7%BD%AE%E5%AF%86%E7%A0%81%E7%95%8C%E9%9D%A2/">mysql 8.0 安装时无设置密码界面</a></div><div class="post-time"><i class="fa fa-table"></i><time datetime="2021-07-10T05:37:54.000Z">2021-07-10</time></div><div class="recent-post-content">mysql 8.0 安装时无设置密码界面及如何更新root 密码 Ubuntu 20.04问题描述Ubuntu 安装mysql 并没有跳出输入密码的界面，安装完成后无法进入root。报错ERROR1698(28000)： Access denied
-原因分析造成这个问题的主要原因是目标主机上安装过mysql 而卸载时apt purge 等命令只删掉了mysql的配置文件，而mysql的用户名等是存储在数据库中的，对应文件夹/var/lib/mysql，而再次安装时，mysql安装程序对原有的数据库没有更改权限，因此会创建临时用户名默认保存在文件夹/etc/mysql/debian.cnf。如（ ...</div><div class="recent-post-tags"><a class="post-tag fa fa-tag" href="javascript:void(0)" date-tags="mysql 8.0"> mysql 8.0</a><a class="post-tag fa fa-tag" href="javascript:void(0)" date-tags="ubuntu 20.04"> ubuntu 20.04</a></div><div class="read-more"><a class="more" href="/2021/07/10/mysql-8-0-%E5%AE%89%E8%A3%85%E6%97%B6%E6%97%A0%E8%AE%BE%E7%BD%AE%E5%AF%86%E7%A0%81%E7%95%8C%E9%9D%A2/#more">ReadMore</a></div><hr></div></section><nav class="cxo-page-nav"><span class="page-number current">1</span></nav></section></article><footer id="cxo-footer-outer"><div id="cxo-footer-inner"><p class="footer-container"><span>Site by </span><a href="https://github.com/sud0x67" target="_blank" rel="noopener"><span>Sud0x67</span></a><span> | Blog </span><a href="https://sud0x67.github.io/"><span>Home</span></a></p><i class="fa fa-user"> </i><span id="busuanzi_value_site_uv"></span><span> | </span><i class="fa fa-eye"> </i><span id="busuanzi_value_site_pv"></span></div></footer><!-- catelog--><!-- top--><i class="fa fa-arrow-up close" id="go-up" aria-hidden="true"></i></body></html>
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Sud0x67 的项目目录：在线工具、AI 协作、解释器教程与技术笔记。">
+    <meta name="theme-color" content="#f7f8fa">
+    <title>Sud0x67 · 项目与笔记</title>
+    <link rel="icon" href="/assets/portal-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/assets/portal.css">
+    <script src="/assets/portal.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#projects" data-i18n="skip">跳至项目</a>
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="brand" href="/" aria-label="Sud0x67"><span class="brand-mark" aria-hidden="true">s.</span><span>Sud0x67</span></a>
+        <nav aria-label="主导航" data-i18n-aria="navigation">
+          <a class="nav-github" href="https://github.com/Sud0x67">GitHub <span aria-hidden="true">↗</span></a>
+          <div class="language-switch" role="group" aria-label="显示语言" data-i18n-aria="language">
+            <button type="button" data-language="zh" aria-pressed="true" lang="zh-CN">中文</button>
+            <button type="button" data-language="en" aria-pressed="false" lang="en">EN</button>
+          </div>
+        </nav>
+      </header>
+      <main>
+        <section class="hero" aria-labelledby="intro-title">
+          <p class="eyebrow"><span class="small-line" aria-hidden="true"></span> THE PERSONAL INDEX</p>
+          <h1 id="intro-title"><span data-i18n="heroOne">一些工具，</span><br><span class="accent" data-i18n="heroTwo">一些探索。</span></h1>
+          <p class="hero-description" data-i18n="intro">你好，我是 Sud0x67。这里收录了我的开源项目、在线工具与技术笔记。把想法写成代码，也把探索留在这里。</p>
+          <a class="hero-link" href="#projects"><span data-i18n="explore">探索项目</span><span aria-hidden="true">↓</span></a>
+          <div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="art-tile tile-code">&lt;/&gt;</div><div class="art-tile tile-star">✳</div><span class="art-coordinate">IDEAS → CODE</span></div>
+        </section>
+        <section class="projects" id="projects" aria-labelledby="projects-title">
+          <div class="section-heading"><h2 id="projects-title" data-i18n="projects">项目目录</h2><span class="section-note" data-i18n="projectNote">工具、产品与学习</span></div>
+          <div class="project-grid">
+            <article class="project-card cipher-card">
+              <div class="card-top"><div class="project-icon cipher-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M10 14v-4a6 6 0 0 1 12 0v4M8 14h16v13H8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M16 19v3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></div><span class="project-kind" data-i18n="toolCategory">在线工具</span></div>
+              <h3><a class="project-link" href="/online-encryption/">Cipher Lab<span class="card-arrow" aria-hidden="true">↗</span></a></h3>
+              <p data-i18n="cipherDescription">在浏览器本地完成加解密、摘要与编码转换。一个面向开发者的密码学工具箱。</p>
+              <ul class="tags" aria-label="项目特点" data-i18n-aria="features"><li>AES / RSA / SM</li><li data-i18n="localProcessing">本地计算</li><li data-i18n="bilingual">中英双语</li></ul>
+              <span class="card-address" aria-hidden="true">/online-encryption/</span>
+            </article>
+            <article class="project-card">
+              <div class="card-top"><div class="project-icon team-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><rect x="5" y="6" width="15" height="12" rx="3" stroke="currentColor" stroke-width="1.7"/><path d="m9 18-1 4 6-4M20 12h4a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-2l-4 3v-3h-3a3 3 0 0 1-3-3" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></div><span class="project-kind" data-i18n="productCategory">产品</span></div>
+              <h3><a class="project-link" href="/team-aligned/">TeamAligned<span class="card-arrow" aria-hidden="true">↗</span></a></h3>
+              <p data-i18n="teamDescription">像与伙伴交流一样，与 AI 一起工作。探索本地优先的 AI 协作与生产力体验。</p>
+              <ul class="tags" aria-label="项目特点" data-i18n-aria="features"><li data-i18n="aiCollaboration">AI 协作</li><li data-i18n="localFirst">本地优先</li><li>macOS</li></ul>
+              <span class="card-address" aria-hidden="true">/team-aligned/</span>
+            </article>
+            <article class="project-card">
+              <div class="card-top"><div class="project-icon book-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M16 8c-4-3-8-3-12-2v19c4-1 8-1 12 2 4-3 8-3 12-2V6c-4-1-8-1-12 2Zm0 0v19" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></div><span class="project-kind" data-i18n="readingCategory">阅读与学习</span></div>
+              <h3><a class="project-link" href="/craftinginterpreters_zh/"><span data-i18n="bookTitle">手撸解释器教程</span><span class="card-arrow" aria-hidden="true">↗</span></a></h3>
+              <p data-i18n="bookDescription">Crafting Interpreters 中文版。从一门小语言出发，一步步理解解释器的工作原理。</p>
+              <ul class="tags" aria-label="项目特点" data-i18n-aria="features"><li data-i18n="interpreter">解释器</li><li data-i18n="programmingLanguages">编程语言</li><li data-i18n="chineseEdition">中文教程</li></ul>
+              <span class="card-address" aria-hidden="true">/craftinginterpreters_zh/</span>
+            </article>
+            <article class="project-card">
+              <div class="card-top"><div class="project-icon resume-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><rect x="7" y="4" width="18" height="24" rx="2" stroke="currentColor" stroke-width="1.7"/><circle cx="16" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/><path d="M11 21c0-5 10-5 10 0M12 24h8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></div><span class="project-kind" data-i18n="aboutCategory">关于我</span></div>
+              <h3><a class="project-link" href="/resume/"><span data-i18n="resumeTitle">个人简历</span><span class="card-arrow" aria-hidden="true">↗</span></a></h3>
+              <p data-i18n="resumeDescription">我的工作经历、研究成果与开源实践。通过一份简历，了解项目背后的开发者。</p>
+              <ul class="tags" aria-label="项目特点" data-i18n-aria="features"><li data-i18n="experience">工作经历</li><li data-i18n="research">研究成果</li><li data-i18n="openSource">开源实践</li></ul>
+              <span class="card-address" aria-hidden="true">/resume/</span>
+            </article>
+          </div>
+        </section>
+        <section class="archive-section" aria-labelledby="archive-title">
+          <div><p class="eyebrow">NOTES &amp; ARCHIVE</p><h2 id="archive-title" data-i18n="archiveTitle">写过的，也留着。</h2><p data-i18n="archiveDescription">早期的技术笔记与踩坑记录，仍然可以在博客归档中找到。</p></div>
+          <div class="archive-links"><a class="archive-primary" href="/archives/"><span data-i18n="archives">博客归档</span><span aria-hidden="true">↗</span></a><a href="/tags/" data-i18n="tags">按标签浏览</a></div>
+        </section>
+      </main>
+      <footer class="site-footer"><span>© Sud0x67</span><span data-i18n="footer">保持好奇，继续构建。</span><a href="https://github.com/Sud0x67/Sud0x67.github.io"><span data-i18n="source">本站源码</span><span aria-hidden="true">↗</span></a></footer>
+    </div>
+  </body>
+</html>
