@@ -28,8 +28,11 @@ test('exposes project destinations and keyboard navigation', async ({ page }) =>
   for (const [name, href] of [
     ['无用文明', 'https://useless-llm.com/'], ['项目源码', 'https://github.com/Sud0x67/useless-civilization'],
     ['Cipher Lab', '/online-encryption/'], ['TeamAligned', '/team-aligned/'],
+    ['Agent Patterns Lab', 'https://github.com/Sud0x67/agent-patterns-lab'],
     ['手撸解释器教程', '/craftinginterpreters_zh/'], ['个人简历', '/resume/'],
   ]) await expect(page.getByRole('link', { name, exact: true })).toHaveAttribute('href', href);
+  const titles = await page.locator('.project-card h3').allTextContents();
+  expect(titles[titles.indexOf('TeamAligned↗') + 1]).toBe('Agent Patterns Lab↗');
   await page.keyboard.press('Tab');
   await expect(page.getByRole('link', { name: '跳至项目' })).toBeFocused();
   await page.keyboard.press('Enter');

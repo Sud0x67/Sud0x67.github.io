@@ -27,6 +27,8 @@
 
 首页已收录[无用文明](https://useless-llm.com/)（[项目源码](https://github.com/Sud0x67/useless-civilization)）：一座可以观察居民生活、聊天与投放事件的 AI 共享小镇。该项目独立部署，导航页仅提供入口。
 
+[Agent Patterns Lab](https://github.com/Sud0x67/agent-patterns-lab) 位于 TeamAligned 之后，直接链接到源码仓库，提供八种经典 Agent 模式的实现、执行轨迹与小型评测。
+
 ## 本地预览
 
 ```sh
