@@ -57,6 +57,7 @@ h1 { font-size: clamp(42px, 5.5vw, 64px); font-weight: 680; line-height: 1.28; l
 .project-icon { width: 45px; height: 45px; display: grid; place-items: center; border-radius: 12px; }
 .project-icon svg { width: 29px; height: 29px; }
 .cipher-icon { background: #e1e9ff; color: #3159d8; }
+.town-icon { background: #eeebfa; color: #7c60b0; }
 .team-icon { background: #e6f3ed; color: #358366; }
 .book-icon { background: #fcf0df; color: #a97835; }
 .resume-icon { background: #eeebfa; color: #7c60b0; }
@@ -70,6 +71,9 @@ h3 { font-size: 21px; font-weight: 650; letter-spacing: -.6px; margin: 0 0 12px;
 .tags li { font-size: 10px; color: #617085; background: #f4f6f9; border: 1px solid #e9edf3; border-radius: 5px; padding: 4px 7px; line-height: 1.4; }
 .cipher-card .tags li { background: #fff9; border-color: #dfe6f5; }
 .card-address { font: 10px ui-monospace, SFMono-Regular, Consolas, monospace; color: #68778e; border-top: 1px solid #edf0f5; padding-top: 15px; letter-spacing: .2px; }
+.card-footer { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; }
+.card-source { position: relative; z-index: 1; font-family: var(--font); }
+.card-source:hover { color: var(--blue); text-decoration: underline; }
 .archive-section { display: flex; justify-content: space-between; gap: 30px; align-items: center; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 35px 0; margin-top: 48px; }
 .archive-section .eyebrow { font-size: 9px; margin-bottom: 13px; letter-spacing: 1.8px; }
 .archive-section h2 { font-size: 22px; letter-spacing: -.6px; margin: 0 0 10px; }

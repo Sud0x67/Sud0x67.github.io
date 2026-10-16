@@ -25,6 +25,8 @@
 
 添加项目时，在 `index.html` 添加入口，并在 `assets/portal.js` 两份字典中补齐文案。无需引入构建工具或后端。旧文章的原始 HTML 可在迁移前的 Git 历史中找到。
 
+首页已收录[无用文明](https://useless-llm.com/)（[项目源码](https://github.com/Sud0x67/useless-civilization)）：一座可以观察居民生活、聊天与投放事件的 AI 共享小镇。该项目独立部署，导航页仅提供入口。
+
 ## 本地预览
 
 ```sh
